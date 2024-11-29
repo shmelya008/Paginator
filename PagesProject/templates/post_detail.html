@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container text-start">
+        <a href="javascript:history.back()">Назад</a>
+        <div class="row my-2">
+            <h1> "{{ post.title }}"</h1>
+        </div>
+        <div class="row my-2">
+            <h5> "{{ post.body }}"</h5>
+        </div>
+        <a href="javascript:history.back()">Назад</a>
+    </div>
+{% endblock content %}
