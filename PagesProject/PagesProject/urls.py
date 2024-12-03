@@ -19,7 +19,7 @@ from django.urls import path
 from pagesapp import views
 
 urlpatterns = [
-    path('', views.PostListView.as_view(), name='post_list'),
+    path('', views.posts_list, name='post_list'),
     path('<slug:slug>', views.PostDetailView.as_view(), name='post_detail'),
     path('admin/', admin.site.urls),
 ]

@@ -1,24 +1,22 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
 from .models import Post
 
 # Create your views here.
 
 
-class PostListView(ListView):
-    queryset = Post.objects.filter(status='published')
-    model = Post
-    context_object_name = 'posts'
-    paginate_by = 3
-    template_name = 'post_list.html'
+def posts_list(request):
+    posts = Post.objects.all()
 
-    def get_queryset(self):
-        return Post.objects.all()
+    # Получаем количество статей на странице из GET-параметров, по умолчанию 5
+    posts_per_page = request.GET.get('posts_per_page', 5)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['page_size'] = self.request.GET.get('page_size', self.paginate_by)
-        return context
+    paginator = Paginator(posts, posts_per_page)  # Создаем пагинатор
+    page_number = request.GET.get('page')  # Получаем номер страницы из GET-параметров
+    page_obj = paginator.get_page(page_number)  # Получаем объекты для текущей страницы
+
+    return render(request, 'post_list.html', {'page_obj': page_obj, 'posts_per_page': posts_per_page})
 
 
 class PostDetailView(DetailView):

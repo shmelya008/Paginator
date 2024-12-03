@@ -7,13 +7,12 @@
 {% block content %}
     <div class="container text-start">
         <h1>Статьи:</h1>
-        {% for post in posts %}
+        {% for post in page_obj %}
             <h5>
                 <a href='{{ post.get_absolute_url }}'>{{ post.title }}</a>
             </h5>
         {% endfor %}
         <p></p>
-        {% include 'paginator.html' with page=page_obj %}
+        {% include 'paginator.html' %}
     </div>
 {% endblock content %}
-

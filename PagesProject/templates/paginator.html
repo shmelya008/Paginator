@@ -1,24 +1,24 @@
-
 <form method="get">
-    <label for="page_size">Количество объектов на странице:</label>
-    <select name="page_size" id="page_size" onchange="this.form.submit()">
-        <option value="5" {% if page_size == '5' %}selected{% endif %}>5</option>
-        <option value="10" {% if page_size == '10' %}selected{% endif %}>10</option>
-        <option value="20" {% if page_size == '20' %}selected{% endif %}>20</option>
-        <option value="50" {% if page_size == '50' %}selected{% endif %}>50</option>
+    <label for="posts_per_page">Количество статей на странице:</label>
+    <select name="posts_per_page" id="articles_per_page" onchange="this.form.submit()">
+        <option value="5" {% if posts_per_page == '5' %}selected{% endif %}>5</option>
+        <option value="10" {% if posts_per_page == '10' %}selected{% endif %}>10</option>
+        <option value="20" {% if posts_per_page == '20' %}selected{% endif %}>20</option>
     </select>
 </form>
 
-<div class="pagination">
+<div>
     <span class="step-links">
-        {% if page.has_previous %}
-            <a href="?page={{ page.previous_page_number }}">Предыдущая</a>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}&posts_per_page={{ posts_per_page }}">предыдущая</a>
         {% endif %}
+
         <span class="current">
-            Страница {{ page.number }} из {{ page.paginator.num_pages }}.
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
         </span>
-            {% if page.has_next %}
-                <a href="?page={{ page.next_page_number }}">Следующая</a>
-            {% endif %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&posts_per_page={{ posts_per_page }}">следующая</a>
+        {% endif %}
     </span>
 </div>
