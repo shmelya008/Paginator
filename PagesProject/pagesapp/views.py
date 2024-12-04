@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView
 from .models import Post
 
 # Create your views here.
